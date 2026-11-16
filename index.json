@@ -1,4 +1,14 @@
 {
   "version": 1,
-  "titles": {}
+  "titles": {
+    "000500001010ec00": {
+      "name": "Mario Kart 8",
+      "shaders": 1669,
+      "pipelines": 1846,
+      "shadersSize": 1746372,
+      "pipelinesSize": 869703,
+      "updated": "2026-11-16T22:05:41Z",
+      "contributors": 1
+    }
+  }
 }
