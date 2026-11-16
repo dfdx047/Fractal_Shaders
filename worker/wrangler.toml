@@ -11,4 +11,4 @@ REPO = "dfdx047/Fractal_Shaders"
 # filled in by deploy.sh
 [[kv_namespaces]]
 binding = "KV"
-id = "KV_NAMESPACE_ID"
+id = "4f819d7d9c174a9b9d4a5355515d67af"
