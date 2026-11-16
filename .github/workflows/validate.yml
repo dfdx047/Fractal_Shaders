@@ -1,0 +1,36 @@
+name: Validate submission
+
+# Runs on pull_request (never pull_request_target): the token is read-only and no secrets are exposed
+# to code from forks. The checker itself is taken from the base branch, so a pull request cannot
+# weaken the rules it is checked against.
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out the base branch (trusted tools)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+          persist-credentials: false
+
+      # The default ref is the pull request merged into the base branch (refs/pull/N/merge).
+      - name: Check out the pull request
+        uses: actions/checkout@v4
+        with:
+          path: pr
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate changed files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: python3 base/tools/validate_submission.py --root pr --diff "$BASE_SHA" HEAD

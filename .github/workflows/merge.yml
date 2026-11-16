@@ -1,0 +1,60 @@
+name: Merge submissions
+
+# After the owner merges a pull request that adds submissions/, merge them into the canonical caches
+# (assets of the "caches" release), update index.json and remove the processed folders.
+on:
+  push:
+    branches: [main]
+    paths: ['submissions/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# One run at a time; a newer pending run replaces an older pending one (it processes everything left).
+concurrency:
+  group: merge-submissions
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      # Check out the tip of main, not the triggering commit: a queued run must see the folders an
+      # earlier run already removed, or it would count those contributors twice.
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Merge submissions into the release caches
+        id: process
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          status=0
+          python3 tools/process_submissions.py --tag caches --work-dir "$RUNNER_TEMP/caches" || status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Commit index.json and remove processed submissions
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git commit -m "Merge community shader submissions"
+          for i in 1 2 3; do
+            git push origin HEAD:main && exit 0
+            git pull --rebase origin main
+          done
+          exit 1
+
+      - name: Report submissions that were left in place
+        if: steps.process.outputs.status != '0'
+        run: |
+          echo "::error::Some submissions failed validation and were not merged; see the log of the merge step."
+          exit 1

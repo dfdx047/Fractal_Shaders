@@ -1,0 +1,8 @@
+# local scratch of tools/process_submissions.py
+.work/
+__pycache__/
+*.pyc
+*.part
+# merged caches live in the "caches" release, never in git
+/*.bin
+/release/
