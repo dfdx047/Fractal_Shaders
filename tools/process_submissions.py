@@ -9,12 +9,21 @@ submissions/<titleid>/<name>/ folder:
      the same (name1, name2) the first one wins, so existing entries are never replaced
   3. upload the merged files back to the release (creating the release if needed)
   4. update index.json and delete the processed folders (the workflow commits the result)
+  5. delete the release assets those folders used from the "submissions" release; with
+     --used-assets FILE the names are only written to FILE, and the workflow deletes them with
+     --delete-assets FILE after the commit is pushed (so a failed push never leaves a folder in main
+     that points to deleted assets)
+
+A folder's caches are either files in the folder or assets of the "submissions" release named in
+meta.json["assets"] (see validate_submission.py).
 
 Every step is idempotent: if the run dies before the commit, the next run merges the same folders
 again and gets the same caches (only the contributor count is applied at the end).
 
     process_submissions.py [--root REPO] [--tag caches] [--work-dir DIR]
     process_submissions.py --local-release-dir DIR   use a directory instead of the GitHub release
+    process_submissions.py --local-submissions-dir DIR   use a directory instead of the submissions release
+    process_submissions.py --delete-assets FILE   delete the submission assets listed in FILE
 """
 
 import argparse
@@ -27,7 +36,8 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from filecache import CacheError, FileCache  # noqa: E402
-from validate_submission import KINDS, TITLE_RE, all_folders, cache_file_name, check_folder  # noqa: E402
+from validate_submission import (KINDS, SUBMISSIONS_TAG, TITLE_RE, all_folders, asset_source,  # noqa: E402
+                                 cache_file_name, check_folder)
 
 INDEX_VERSION = 1
 RELEASE_NOTES = ("Canonical community shader caches for Fractal. Files are updated automatically "
@@ -113,15 +123,24 @@ def save_index(path, idx):
     os.replace(tmp, path)
 
 
-def process_title(root, tid, folders, release, work):
-    """Merge the valid folders of one title. Returns (stats dict, processed folders, errors)."""
+def process_title(root, tid, folders, release, work, assets, used_assets):
+    """Merge the valid folders of one title. Returns (result dict, processed folders, errors).
+
+    used_assets: {asset name: folder} of assets already claimed in this run (updated here).
+    """
     errors = []
     accepted = []
     for folder in folders:
         fp = os.path.join(root, "submissions", tid, folder)
         try:
-            accepted.append((folder, check_folder(fp, tid)))
-        except (OSError, ValueError) as e:
+            r = check_folder(fp, tid, assets, os.path.join(work, "assets"))
+            for a in r["assets"]:
+                if a in used_assets:
+                    raise ValueError("asset %s is also used by %s" % (a, used_assets[a]))
+            for a in r["assets"]:
+                used_assets[a] = "%s/%s" % (tid, folder)
+            accepted.append((folder, r))
+        except (OSError, ValueError, subprocess.CalledProcessError) as e:
             errors.append("submissions/%s/%s: %s (left in place)" % (tid, folder, e))
     if not accepted:
         return None, [], errors
@@ -169,7 +188,9 @@ def process_title(root, tid, folders, release, work):
         stats[kind] = (len(merged.entries), size)
     release.upload(uploads)
     names = [r["meta"]["gameName"] for _, r in accepted if r["meta"]["gameName"]]
-    return {"stats": stats, "gameName": names[-1] if names else "", "count": len(accepted)}, [f for f, _ in accepted], errors
+    res = {"stats": stats, "gameName": names[-1] if names else "", "count": len(accepted),
+           "assets": [a for _, r in accepted for a in r["assets"]]}
+    return res, [f for f, _ in accepted], errors
 
 
 def main():
@@ -179,8 +200,22 @@ def main():
     ap.add_argument("--repo", help="owner/name for gh (default: the repository of --root)")
     ap.add_argument("--local-release-dir", help="use this directory instead of the GitHub release")
     ap.add_argument("--work-dir", help="scratch directory (default: <root>/.work)")
-    ap.add_argument("--keep-submissions", action="store_true", help="do not delete processed folders")
+    ap.add_argument("--keep-submissions", action="store_true", help="do not delete processed folders or assets")
+    ap.add_argument("--submissions-tag", default=SUBMISSIONS_TAG, help="release holding submitted assets")
+    ap.add_argument("--local-submissions-dir", help="use this directory instead of the submissions release")
+    ap.add_argument("--used-assets", metavar="FILE",
+                    help="write the names of the merged submission assets to FILE instead of deleting them")
+    ap.add_argument("--delete-assets", metavar="FILE", help="only delete the submission assets listed in FILE")
     a = ap.parse_args()
+
+    assets = asset_source(a.local_submissions_dir, a.submissions_tag, a.repo)
+    if a.delete_assets:
+        with open(a.delete_assets, encoding="utf-8") as f:
+            names = [n.strip() for n in f if n.strip()]
+        for n in names:
+            assets.delete(n)
+        print("Deleted %d submission asset(s)." % len(names))
+        return 0
 
     root = os.path.abspath(a.root)
     work = os.path.abspath(a.work_dir or os.path.join(root, ".work"))
@@ -201,9 +236,11 @@ def main():
 
     now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     processed = []
+    used_assets = {}
+    merged_assets = []
     for tid in sorted(by_title):
         print("%s: %d submission(s)" % (tid, len(by_title[tid])))
-        res, done, errs = process_title(root, tid, by_title[tid], release, work)
+        res, done, errs = process_title(root, tid, by_title[tid], release, work, assets, used_assets)
         errors += errs
         if res is None:
             continue
@@ -221,6 +258,7 @@ def main():
             "contributors": entry.get("contributors", 0) + res["count"],
         }
         processed += [(tid, f) for f in done]
+        merged_assets += res["assets"]
 
     save_index(index_path, idx)
     if not a.keep_submissions:
@@ -229,8 +267,16 @@ def main():
             tdir = os.path.join(root, "submissions", tid)
             if not os.listdir(tdir):
                 os.rmdir(tdir)
+        if a.used_assets:
+            with open(a.used_assets, "w", encoding="utf-8") as f:
+                f.write("".join(n + "\n" for n in merged_assets))
+        else:
+            for n in merged_assets:
+                assets.delete(n)
     shutil.rmtree(work, ignore_errors=True)
-    print("Processed %d submission(s)." % len(processed))
+    print("Processed %d submission(s), %d submission asset(s) %s." % (
+        len(processed), len(merged_assets),
+        "kept" if a.keep_submissions else ("to delete" if a.used_assets else "deleted")))
     if errors:
         print("\nSome submissions were not processed:", file=sys.stderr)
         for e in errors:

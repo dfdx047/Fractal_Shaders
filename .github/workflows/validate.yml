@@ -30,7 +30,13 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      # Cache files sent by the app are assets of the "submissions" release named in meta.json;
+      # reading a public release only needs the read-only token.
       - name: Validate changed files
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        run: python3 base/tools/validate_submission.py --root pr --diff "$BASE_SHA" HEAD
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: >
+          python3 base/tools/validate_submission.py --root pr --diff "$BASE_SHA" HEAD
+          --work-dir "$RUNNER_TEMP/assets"

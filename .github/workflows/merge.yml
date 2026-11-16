@@ -1,7 +1,8 @@
 name: Merge submissions
 
 # After the owner merges a pull request that adds submissions/, merge them into the canonical caches
-# (assets of the "caches" release), update index.json and remove the processed folders.
+# (assets of the "caches" release), update index.json, remove the processed folders and delete the
+# cache files they used from the "submissions" release.
 on:
   push:
     branches: [main]
@@ -34,7 +35,8 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           status=0
-          python3 tools/process_submissions.py --tag caches --work-dir "$RUNNER_TEMP/caches" || status=$?
+          python3 tools/process_submissions.py --tag caches --work-dir "$RUNNER_TEMP/caches" \
+            --used-assets "$RUNNER_TEMP/used_assets.txt" || status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
 
       - name: Commit index.json and remove processed submissions
@@ -52,6 +54,16 @@ jobs:
             git pull --rebase origin main
           done
           exit 1
+
+      # Only after the push: a folder still in main must never point to deleted assets.
+      - name: Delete merged assets from the submissions release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if [ -s "$RUNNER_TEMP/used_assets.txt" ]; then
+            python3 tools/process_submissions.py --delete-assets "$RUNNER_TEMP/used_assets.txt"
+          fi
 
       - name: Report submissions that were left in place
         if: steps.process.outputs.status != '0'
