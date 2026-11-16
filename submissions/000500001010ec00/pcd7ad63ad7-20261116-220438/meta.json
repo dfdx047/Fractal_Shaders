@@ -1,0 +1,14 @@
+{
+  "titleId": "000500001010ec00",
+  "gameName": "Mario Kart 8",
+  "appVersion": "0.1-beta",
+  "device": "Anbernic RG Cube",
+  "gpu": "Mali",
+  "driver": "",
+  "shaders": 1669,
+  "pipelines": 1846,
+  "assets": {
+    "shaders": "000500001010ec00_shaders_pcd7ad63ad7-20261116-220433-beb06b.bin",
+    "vkpipeline": "000500001010ec00_vkpipeline_pcd7ad63ad7-20261116-220436-818838.bin"
+  }
+}
