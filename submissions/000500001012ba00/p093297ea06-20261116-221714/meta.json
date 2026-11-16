@@ -1,0 +1,14 @@
+{
+  "titleId": "000500001012ba00",
+  "gameName": "DEUS EX: HUMAN REV. DIRECTOR'S CUT",
+  "appVersion": "0.1-beta",
+  "device": "Xiaomi 2311DRK48G",
+  "gpu": "mt6897",
+  "driver": "",
+  "shaders": 232,
+  "pipelines": 258,
+  "assets": {
+    "shaders": "000500001012ba00_shaders_p093297ea06-20261116-221710-bb6213.bin",
+    "vkpipeline": "000500001012ba00_vkpipeline_p093297ea06-20261116-221712-be1359.bin"
+  }
+}
