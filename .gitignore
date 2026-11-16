@@ -6,3 +6,6 @@ __pycache__/
 # merged caches live in the "caches" release, never in git
 /*.bin
 /release/
+# wrangler local state
+worker/.wrangler/
+worker/node_modules/

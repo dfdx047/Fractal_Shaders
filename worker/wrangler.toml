@@ -1,0 +1,14 @@
+# Upload service of the Fractal app: receives a game's shader cache (no account needed), checks it is a Cemu cache of
+# that game and opens a pull request in this repository. The GitHub token is a Worker secret (GITHUB_TOKEN), never
+# stored here. Deploy: bash deploy.sh
+name = "fractal-shaders"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+[vars]
+REPO = "dfdx047/Fractal_Shaders"
+
+# filled in by deploy.sh
+[[kv_namespaces]]
+binding = "KV"
+id = "KV_NAMESPACE_ID"
