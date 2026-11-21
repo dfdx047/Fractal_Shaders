@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010180600",
+  "gameName": "Captain Toad: Treasure Tracker",
+  "appVersion": "0.2-beta",
+  "device": "Xiaomi Mi A3",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 142,
+  "pipelines": 271,
+  "assets": {
+    "shaders": "0005000010180600_shaders_p3d53f67820-20261121-130740-3a1605.bin",
+    "vkpipeline": "0005000010180600_vkpipeline_p3d53f67820-20261121-130742-79f8ed.bin"
+  }
+}
