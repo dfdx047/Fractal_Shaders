@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010143500",
+  "gameName": "THE LEGEND OF ZELDA The Wind Waker HD",
+  "appVersion": "0.2-beta",
+  "device": "samsung SM-G780G",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 2013,
+  "pipelines": 1381,
+  "assets": {
+    "shaders": "0005000010143500_shaders_pa6e4d7b675-20261122-190614-89c54c.bin",
+    "vkpipeline": "0005000010143500_vkpipeline_pa6e4d7b675-20261122-190616-040687.bin"
+  }
+}
