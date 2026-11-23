@@ -1,0 +1,14 @@
+{
+  "titleId": "00050000101c9400",
+  "gameName": "The Legend of Zelda Breath of the Wild",
+  "appVersion": "0.2-beta",
+  "device": "Xiaomi 22021211RG",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 2863,
+  "pipelines": 5287,
+  "assets": {
+    "shaders": "00050000101c9400_shaders_p0635b6af30-20261123-023202-4aa2f1.bin",
+    "vkpipeline": "00050000101c9400_vkpipeline_p0635b6af30-20261123-023205-c3ae83.bin"
+  }
+}
