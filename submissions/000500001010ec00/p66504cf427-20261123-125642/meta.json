@@ -1,0 +1,14 @@
+{
+  "titleId": "000500001010ec00",
+  "gameName": "MARIO KART 8",
+  "appVersion": "0.2-beta",
+  "device": "samsung SM-G781B",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 2070,
+  "pipelines": 2207,
+  "assets": {
+    "shaders": "000500001010ec00_shaders_p66504cf427-20261123-125637-60a300.bin",
+    "vkpipeline": "000500001010ec00_vkpipeline_p66504cf427-20261123-125640-c75bc8.bin"
+  }
+}
