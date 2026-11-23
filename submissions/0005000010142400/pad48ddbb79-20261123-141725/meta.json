@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010142400",
+  "gameName": "New SUPER LUIGI U",
+  "appVersion": "0.2-beta",
+  "device": "OPPO PJB110",
+  "gpu": "mt6833",
+  "driver": "",
+  "shaders": 335,
+  "pipelines": 440,
+  "assets": {
+    "shaders": "0005000010142400_shaders_pad48ddbb79-20261123-141720-137241.bin",
+    "vkpipeline": "0005000010142400_vkpipeline_pad48ddbb79-20261123-141722-ce525a.bin"
+  }
+}
