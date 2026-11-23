@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010102100",
+  "gameName": "Nintendo Land",
+  "appVersion": "0.2-beta",
+  "device": "Xiaomi 2511FPC34G",
+  "gpu": "mt6899",
+  "driver": "",
+  "shaders": 384,
+  "pipelines": 357,
+  "assets": {
+    "shaders": "0005000010102100_shaders_pa6c9a66bd8-20261123-214611-6d3237.bin",
+    "vkpipeline": "0005000010102100_vkpipeline_pa6c9a66bd8-20261123-214613-0bc85f.bin"
+  }
+}
