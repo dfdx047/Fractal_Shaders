@@ -1,0 +1,14 @@
+{
+  "titleId": "000500001019e600",
+  "gameName": "THE LEGEND OF ZELDA Twilight Princess HD",
+  "appVersion": "0.2-beta",
+  "device": "Xiaomi 2509ARPBDG",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 2635,
+  "pipelines": 2035,
+  "assets": {
+    "shaders": "000500001019e600_shaders_pdb41e6d4a0-20261124-022423-df665c.bin",
+    "vkpipeline": "000500001019e600_vkpipeline_pdb41e6d4a0-20261124-022426-770fdf.bin"
+  }
+}
