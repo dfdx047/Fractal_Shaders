@@ -1,0 +1,14 @@
+{
+  "titleId": "00050000101df500",
+  "gameName": "POKKÉN TOURNAMENT",
+  "appVersion": "0.2-beta",
+  "device": "INFINIX Infinix X6739",
+  "gpu": "mt6893",
+  "driver": "",
+  "shaders": 151,
+  "pipelines": 256,
+  "assets": {
+    "shaders": "00050000101df500_shaders_pd6f23cee58-20261124-180734-7d8d82.bin",
+    "vkpipeline": "00050000101df500_vkpipeline_pd6f23cee58-20261124-180741-f9570f.bin"
+  }
+}
