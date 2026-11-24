@@ -1,0 +1,14 @@
+{
+  "titleId": "00050000101c9500",
+  "gameName": "The Legend of Zelda Breath of the Wild",
+  "appVersion": "0.2-beta",
+  "device": "samsung SM-S948B",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 9276,
+  "pipelines": 54318,
+  "assets": {
+    "shaders": "00050000101c9500_shaders_p0e13d7deb4-20261124-042456-14de75.bin",
+    "vkpipeline": "00050000101c9500_vkpipeline_p0e13d7deb4-20261124-042500-84861a.bin"
+  }
+}
