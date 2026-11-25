@@ -1,0 +1,14 @@
+{
+  "titleId": "000500001017d800",
+  "gameName": "Hyrule Warriors",
+  "appVersion": "0.2-beta",
+  "device": "AYN AYN Thor",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 287,
+  "pipelines": 247,
+  "assets": {
+    "shaders": "000500001017d800_shaders_p36d1a0842f-20261125-023856-69e5f3.bin",
+    "vkpipeline": "000500001017d800_vkpipeline_p36d1a0842f-20261125-023858-6a3cbb.bin"
+  }
+}
