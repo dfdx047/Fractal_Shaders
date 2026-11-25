@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010111700",
+  "gameName": "Injustice: Gods Among Us",
+  "appVersion": "0.2-beta",
+  "device": "AYN AYN Thor",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 257,
+  "pipelines": 339,
+  "assets": {
+    "shaders": "0005000010111700_shaders_p36d1a0842f-20261125-024931-7cea8d.bin",
+    "vkpipeline": "0005000010111700_vkpipeline_p36d1a0842f-20261125-024932-7016a8.bin"
+  }
+}
