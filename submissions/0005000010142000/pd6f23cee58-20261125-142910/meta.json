@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010142000",
+  "gameName": "WATCH_DOGS",
+  "appVersion": "0.2-beta",
+  "device": "INFINIX Infinix X6739",
+  "gpu": "mt6893",
+  "driver": "",
+  "shaders": 438,
+  "pipelines": 347,
+  "assets": {
+    "shaders": "0005000010142000_shaders_pd6f23cee58-20261125-142900-a15970.bin",
+    "vkpipeline": "0005000010142000_vkpipeline_pd6f23cee58-20261125-142904-d9e5d0.bin"
+  }
+}
