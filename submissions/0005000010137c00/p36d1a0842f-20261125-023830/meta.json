@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010137c00",
+  "gameName": "Batman™: Arkham Origins",
+  "appVersion": "0.2-beta",
+  "device": "AYN AYN Thor",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 1174,
+  "pipelines": 1734,
+  "assets": {
+    "shaders": "0005000010137c00_shaders_p36d1a0842f-20261125-023826-517a44.bin",
+    "vkpipeline": "0005000010137c00_vkpipeline_p36d1a0842f-20261125-023828-d50590.bin"
+  }
+}
