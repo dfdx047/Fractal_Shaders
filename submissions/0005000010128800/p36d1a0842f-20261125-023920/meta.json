@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010128800",
+  "gameName": "Need for Speed™ Most Wanted U",
+  "appVersion": "0.2-beta",
+  "device": "AYN AYN Thor",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 482,
+  "pipelines": 415,
+  "assets": {
+    "shaders": "0005000010128800_shaders_p36d1a0842f-20261125-023918-8960f3.bin",
+    "vkpipeline": "0005000010128800_vkpipeline_p36d1a0842f-20261125-023919-235dcb.bin"
+  }
+}
