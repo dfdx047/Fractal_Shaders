@@ -1,0 +1,14 @@
+{
+  "titleId": "00050000101a3500",
+  "gameName": "Mario Tennis: Ultra Smash",
+  "appVersion": "0.2-beta",
+  "device": "Xiaomi 2311DRK48G",
+  "gpu": "mt6897",
+  "driver": "",
+  "shaders": 612,
+  "pipelines": 527,
+  "assets": {
+    "shaders": "00050000101a3500_shaders_pdc50c044ca-20261126-163416-df04e8.bin",
+    "vkpipeline": "00050000101a3500_vkpipeline_pdc50c044ca-20261126-163418-ecc9d1.bin"
+  }
+}
