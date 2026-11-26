@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010145c00",
+  "gameName": "SUPER MARIO 3D WORLD",
+  "appVersion": "0.2-beta",
+  "device": "Xiaomi 2310FPCA4G",
+  "gpu": "mt6768",
+  "driver": "",
+  "shaders": 418,
+  "pipelines": 394,
+  "assets": {
+    "shaders": "0005000010145c00_shaders_pe43f6929a4-20261126-141431-482656.bin",
+    "vkpipeline": "0005000010145c00_vkpipeline_pe43f6929a4-20261126-141434-2d292b.bin"
+  }
+}
