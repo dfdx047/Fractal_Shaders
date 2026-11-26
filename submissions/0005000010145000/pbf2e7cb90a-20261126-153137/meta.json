@@ -1,0 +1,14 @@
+{
+  "titleId": "0005000010145000",
+  "gameName": "Super Smash Bros. for Wii U",
+  "appVersion": "0.2-beta",
+  "device": "vivo V2341",
+  "gpu": "qcom",
+  "driver": "",
+  "shaders": 2987,
+  "pipelines": 7392,
+  "assets": {
+    "shaders": "0005000010145000_shaders_pbf2e7cb90a-20261126-153125-6c5bdb.bin",
+    "vkpipeline": "0005000010145000_vkpipeline_pbf2e7cb90a-20261126-153135-5a02c5.bin"
+  }
+}
