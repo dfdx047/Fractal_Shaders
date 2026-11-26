@@ -1,0 +1,14 @@
+{
+  "titleId": "000500001010ec00",
+  "gameName": "MARIO KART 8",
+  "appVersion": "0.2-beta",
+  "device": "OPPO CPH2271",
+  "gpu": "mt6765",
+  "driver": "",
+  "shaders": 1670,
+  "pipelines": 1944,
+  "assets": {
+    "shaders": "000500001010ec00_shaders_p3983d29513-20261126-195940-384996.bin",
+    "vkpipeline": "000500001010ec00_vkpipeline_p3983d29513-20261126-195942-aec550.bin"
+  }
+}
