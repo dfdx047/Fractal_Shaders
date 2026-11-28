@@ -1,0 +1,14 @@
+{
+  "titleId": "000500001010ed00",
+  "gameName": "MARIO KART 8",
+  "appVersion": "0.2-beta",
+  "device": "Xiaomi 2506BPN68G",
+  "gpu": "mt6991",
+  "driver": "",
+  "shaders": 1517,
+  "pipelines": 1226,
+  "assets": {
+    "shaders": "000500001010ed00_shaders_p7cd6c5729d-20261128-060316-a2b50e.bin",
+    "vkpipeline": "000500001010ed00_vkpipeline_p7cd6c5729d-20261128-060319-712953.bin"
+  }
+}
